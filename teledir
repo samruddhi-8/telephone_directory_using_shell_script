@@ -1,0 +1,49 @@
+clear
+i="y"
+echo "enter file name"
+read spn.txt
+while [ $i = "y" ]
+do
+clear
+echo "1.add"
+echo "2.view"
+echo "3.search"
+echo "4.update"
+echo "5.delete"
+echo "6.exit"
+echo "enter your choice"
+read ch
+  case $ch in
+    1)echo "enter name"
+      read name
+      echo "enter number"
+      read num
+      echo "$name $num">>spn.txt;;
+    2)cat spn.txt;;
+    3)echo "enter name or number to search"
+      read a
+        grep -i "$a" spn.txt;;
+    4)echo "enter name whose contact is to be updated"
+      read b
+      echo "enter new number"
+      read n
+      num=n
+      sed -i -e "/$b/d" spn.txt
+      echo "$b $n">>spn.txt;;
+    5)echo "DELETE CONTACT"
+      read -p "enter contact name to be deleted :" delete_string
+      sed -i -e "/$delete_string/d" spn.txt
+      echo "delete succesfully";;
+    6)exit;;
+
+    *)echo "invalid choice";;
+  esac
+
+echo "do you want to continue?"
+read i
+if [ $i != "y" ]
+then
+  exit
+fi
+done
+
